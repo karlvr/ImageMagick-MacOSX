@@ -9,6 +9,10 @@ http://s.sudre.free.fr/Software/Packages/about.html
 You must have Home Brew installed, as it is used to install dependencies on your system:  
 http://mxcl.github.io/homebrew/
 
+You must have Ghostscript installed. This is in order to build ImageMagick with ps support. I suggest
+installing Ghostscript using the installer bundle I've created, available from:  
+https://github.com/karlvr/Ghostscript-MacOSX
+
 You should have a Developer ID Installer identity from Apple in your Keychain. This is used to sign the package.
 If you don't have this identity the script will skip the signing stage.
 
