@@ -1,5 +1,5 @@
 ImageMagick for Mac OS X
-==================
+========================
 
 Build scripts for creating a package for ImageMagick on Mac OS X.
 
