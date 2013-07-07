@@ -24,7 +24,7 @@ Extract the ImageMagick source into this repository, to create a folder such as 
 Open Terminal.app to that ImageMagick source directory, then run the build script:  
 ``../build-packages.sh``
 
-The build script will download dependencies, configure and compile then and the compile ImageMagick.
+The build script will download dependencies, configure and compile them, and then compile ImageMagick.
 It also checks that all of the expected capabilities have been included successfully, and that the package
 does not have any depdendencies that won't work on other systems.
 
