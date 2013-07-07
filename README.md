@@ -31,6 +31,13 @@ The build script will download dependencies, configure and compile them, and the
 It also checks that all of the expected capabilities have been included successfully, and that the package
 does not have any depdendencies that won't work on other systems.
 
+You will likely be prompted for your password during the build, as the script uses ``sudo`` to build into the
+``/opt/ImageMagick`` directory.
+
 If you have XQuartz installed, the build script will create an XQuartz build of ImageMagick as well.
 
 The output files will be in the ``build`` directory.
+
+After the build, ImageMagick will be installed in ``/opt/ImageMagick`` but will not have been added to your path.
+Install the package to create an entry in ``/etc/paths.d`` so it will be in your path. Note that you have to close
+and reopen any Terminal.app windows to get the new PATH environment variable.
