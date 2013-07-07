@@ -13,6 +13,9 @@ You must have Ghostscript installed. This is in order to build ImageMagick with 
 installing Ghostscript using the installer bundle I've created, available from:  
 https://github.com/karlvr/Ghostscript-MacOSX
 
+You should have XQuartz installed, for building ImageMagick with support for X and FreeType:  
+http://xquartz.macosforge.org/landing/
+
 You should have a Developer ID Installer identity from Apple in your Keychain. This is used to sign the package.
 If you don't have this identity the script will skip the signing stage.
 
