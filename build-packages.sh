@@ -167,9 +167,17 @@ fi
 
 /usr/local/bin/packagesbuild "${PACKAGE_CONFIG}"
 /usr/bin/productsign --sign "Developer ID Installer" "../build/ImageMagick.pkg" "../build/ImageMagick-$REV.pkg"
+if [ $? != 0 ]; then
+	mv "../build/ImageMagick.pkg" "../build/ImageMagick-$REV.pkg"
+fi
 /bin/rm "../build/ImageMagick.pkg"
 /usr/bin/zip "../build/ImageMagick-$REV.pkg.zip" "../build/ImageMagick-$REV.pkg"
 
+
+########################
+# XQuartz version
+
+if [ -d "/opt/X11" ]; then
 export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
 
 ./configure --prefix /opt/ImageMagick --enable-delegate-build --with-x --x-libraries /usr/X11/lib --disable-static CFLAGS=-mmacosx-version-min=10.5 && \
@@ -198,7 +206,11 @@ if [ $? != 0 ]; then
 fi
 
 /usr/local/bin/packagesbuild "${PACKAGE_CONFIG}"
-#mv "../build/ImageMagick.pkg" "../build/ImageMagick-$REV-with-X.pkg"
 /usr/bin/productsign --sign "Developer ID Installer" "../build/ImageMagick.pkg" "../build/ImageMagick-$REV-with-X.pkg"
+if [ $? != 0 ]; then
+	mv "../build/ImageMagick.pkg" "../build/ImageMagick-$REV-with-X.pkg"
+fi
 /bin/rm "../build/ImageMagick.pkg"
 /usr/bin/zip "../build/ImageMagick-$REV-with-X.pkg.zip" "../build/ImageMagick-$REV-with-X.pkg"
+
+fi # XQuartz
