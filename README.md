@@ -24,4 +24,6 @@ The build script will download dependencies, configure and compile then and the 
 It also checks that all of the expected capabilities have been included successfully, and that the package
 does not have any depdendencies that won't work on other systems.
 
+If you have XQuartz installed, the build script will create an XQuartz build of ImageMagick as well.
+
 The output files will be in the build directory.
