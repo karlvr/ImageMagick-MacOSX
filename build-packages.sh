@@ -5,6 +5,13 @@ if [ ! -d "magick" ]; then
 	exit 1
 fi
 
+checkSuccess() {
+	if [ $? != 0 ]; then
+		echo "*** Failed: $MESSAGE"
+		exit 1
+	fi
+}
+
 WD=${PWD##*/}
 REV=${WD/ImageMagick-/}
 VERSION=${REV%-*}
@@ -24,6 +31,7 @@ if [ ! -h "jpeg" ]; then
 	./configure --disable-shared && \
 	make && \
 	popd
+	MESSAGE="compile jpeg" ; checkSuccess
 fi
 
 if [ ! -h "jp2" ]; then
@@ -35,17 +43,20 @@ if [ ! -h "jp2" ]; then
 	./configure --disable-shared && \
 	make && \
 	popd
+	MESSAGE="compile jp2" ; checkSuccess
 fi
 
 if [ ! -h "tiff" ]; then
+	# Disable lzma as ImageMagick doesn't include lzma in the list of libs required to link with libtiff
 	brew install libtiff && \
 	curl -O http://download.osgeo.org/libtiff/tiff-4.0.3.tar.gz && \
 	tar zxf tiff-4.0.3.tar.gz && \
 	ln -s tiff-4.0.3 tiff && \
 	pushd tiff && \
-	./configure --disable-shared && \
+	./configure --disable-shared --disable-lzma && \
 	make && \
 	popd
+	MESSAGE="compile tiff" ; checkSuccess
 fi
 
 if [ ! -h "lcms" ]; then
@@ -57,7 +68,7 @@ if [ ! -h "lcms" ]; then
 	./configure --disable-shared && \
 	make && \
 	popd
-	
+	MESSAGE="compile lcms" ; checkSuccess
 fi
 
 if [ ! -h "png" ]; then
@@ -69,6 +80,7 @@ if [ ! -h "png" ]; then
 	./configure --disable-shared && \
 	make && \
 	popd
+	MESSAGE="compile png" ; checkSuccess
 fi
 
 if [ ! -h "fftw" ]; then
@@ -80,6 +92,7 @@ if [ ! -h "fftw" ]; then
 	./configure --disable-shared CXXFLAGS=-fPIC CFLAGS=-fPIC && \
 	make && \
 	popd
+	MESSAGE="compile fftw" ; checkSuccess
 fi
 
 if [ ! -h "lzma" ]; then
@@ -91,6 +104,7 @@ if [ ! -h "lzma" ]; then
 	./configure --disable-shared && \
 	make && \
 	popd
+	MESSAGE="compile lzma" ; checkSuccess
 fi
 
 if [ ! -h "webp" ]; then
@@ -101,15 +115,17 @@ if [ ! -h "webp" ]; then
 	pushd webp && \
 	./configure --disable-shared && \
 	make && \
-	mkdir .libs && \
-	cp src/.libs/* .libs && \
+	ln -s src/.libs . && \
 	popd
+	MESSAGE="compile webp" ; checkSuccess
 fi
 
 ./configure --prefix /opt/ImageMagick --enable-delegate-build --without-x --without-freetype --disable-static CFLAGS=-mmacosx-version-min=10.5 && \
 sudo rm -rf /opt/ImageMagick && \
 make && \
 sudo make install
+
+MESSAGE="compile ImageMagick" ; checkSuccess
 
 # Check delegates
 checkDelegate() {
@@ -185,6 +201,8 @@ sudo rm -rf /opt/ImageMagick && \
 make clean && \
 make && \
 sudo make install
+
+MESSAGE="compile ImageMagick with XQuartz" ; checkSuccess
 
 checkDelegates
 
