@@ -193,7 +193,9 @@ if [ $? != 0 ]; then
 	mv "../build/ImageMagick.pkg" "../build/ImageMagick-$REV.pkg"
 fi
 /bin/rm "../build/ImageMagick.pkg"
-/usr/bin/zip "../build/ImageMagick-$REV.pkg.zip" "../build/ImageMagick-$REV.pkg"
+pushd ../build
+/usr/bin/zip "ImageMagick-$REV.pkg.zip" "ImageMagick-$REV.pkg"
+popd
 
 
 ########################
@@ -235,6 +237,8 @@ if [ $? != 0 ]; then
 	mv "../build/ImageMagick.pkg" "../build/ImageMagick-$REV-with-X.pkg"
 fi
 /bin/rm "../build/ImageMagick.pkg"
-/usr/bin/zip "../build/ImageMagick-$REV-with-X.pkg.zip" "../build/ImageMagick-$REV-with-X.pkg"
+pushd ../build
+/usr/bin/zip "ImageMagick-$REV-with-X.pkg.zip" "ImageMagick-$REV-with-X.pkg"
+popd
 
 fi # XQuartz
