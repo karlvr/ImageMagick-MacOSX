@@ -5,6 +5,12 @@ if [ ! -d "magick" ]; then
 	exit 1
 fi
 
+if [ ! -d "/opt/Ghostscript" ]; then
+	echo "Ghostscript not installed. Please install Ghostscript first in order to build ImageMagick with ps support."
+	echo "You could use the installer I've prepared for Ghostscript from "
+	exit 1
+fi
+
 checkSuccess() {
 	if [ $? != 0 ]; then
 		echo "*** Failed: $MESSAGE"
