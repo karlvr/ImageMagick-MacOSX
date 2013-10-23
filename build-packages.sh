@@ -126,13 +126,6 @@ if [ ! -h "webp" ]; then
 	MESSAGE="compile webp" ; checkSuccess
 fi
 
-./configure --prefix /opt/ImageMagick --enable-delegate-build --without-x --without-freetype --disable-static CFLAGS=-mmacosx-version-min=10.5 && \
-sudo rm -rf /opt/ImageMagick && \
-make && \
-sudo make install
-
-MESSAGE="compile ImageMagick" ; checkSuccess
-
 # Check delegates
 checkDelegate() {
 	/opt/ImageMagick/bin/convert -version | grep Delegates | grep $DELEGATE > /dev/null
@@ -173,17 +166,28 @@ checkFormats() {
 	FORMAT=webp; checkFormat
 }
 
+########################
+# No XQuartz
+
+./configure --prefix /opt/ImageMagick --enable-delegate-build --without-x --without-freetype --disable-static CFLAGS=-mmacosx-version-min=10.5 && \
+sudo rm -rf /opt/ImageMagick && \
+make clean && \
+make && \
+sudo make install
+
+MESSAGE="compile ImageMagick" ; checkSuccess
+
 checkDelegates
 checkFormats
 
 otool -L /opt/ImageMagick/bin/convert | grep "/usr/local" > /dev/null
 if [ $? == 0 ]; then
-	echo "*** FAIL convert links to /usr/local"
+	echo "*** FAIL /opt/ImageMagick/bin/convert links to /usr/local"
 	exit 1
 fi
 otool -L /opt/ImageMagick/bin/convert | grep "X11" > /dev/null
 if [ $? == 0 ]; then
-	echo "*** FAIL convert links X11"
+	echo "*** FAIL /opt/ImageMagick/bin/convert links X11"
 	exit 1
 fi
 
@@ -196,6 +200,7 @@ fi
 pushd ../build
 /usr/bin/zip "ImageMagick-$REV.pkg.zip" "ImageMagick-$REV.pkg"
 popd
+
 
 
 ########################
