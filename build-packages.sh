@@ -221,7 +221,7 @@ popd
 # XQuartz version
 
 if [ -d "/opt/X11" ]; then
-export PKG_CONFIG_PATH=/usr/X11/lib/pkgconfig
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 
 ./configure --prefix /opt/ImageMagick --enable-delegate-build --with-x --x-libraries /usr/X11/lib --disable-static CFLAGS=-mmacosx-version-min=10.5 && \
 sudo rm -rf /opt/ImageMagick && \
