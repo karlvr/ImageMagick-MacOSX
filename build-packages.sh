@@ -105,6 +105,7 @@ if [ ! -h "fftw" ]; then
 	pushd fftw && \
 	./configure --disable-shared CXXFLAGS=-fPIC CFLAGS=-fPIC && \
 	make && \
+	ln -s api/fftw3.h . && \
 	popd
 	MESSAGE="compile fftw" ; checkSuccess
 fi
