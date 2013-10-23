@@ -27,8 +27,11 @@ PACKAGE_CONFIG="../ImageMagick.pkgproj"
 
 export PKG_CONFIG_PATH=
 
+########################
 # Dependencies
+
 if [ ! -h "jpeg" ]; then
+	# Check latest source: brew edit libjpeg
 	brew install libjpeg && \
 	curl -O http://www.ijg.org/files/jpegsrc.v8d.tar.gz && \
 	tar zxf jpegsrc.v8d.tar.gz && \
@@ -41,6 +44,7 @@ if [ ! -h "jpeg" ]; then
 fi
 
 if [ ! -h "jp2" ]; then
+	# Check latest source: brew edit jasper
 	brew install jasper && \
 	curl -O http://download.osgeo.org/gdal/jasper-1.900.1.uuid.tar.gz && \
 	tar zxf jasper-1.900.1.uuid.tar.gz && \
@@ -53,6 +57,7 @@ if [ ! -h "jp2" ]; then
 fi
 
 if [ ! -h "tiff" ]; then
+	# Check latest source: brew edit libtiff
 	# Disable lzma as ImageMagick doesn't include lzma in the list of libs required to link with libtiff
 	brew install libtiff && \
 	curl -O http://download.osgeo.org/libtiff/tiff-4.0.3.tar.gz && \
@@ -66,6 +71,7 @@ if [ ! -h "tiff" ]; then
 fi
 
 if [ ! -h "lcms" ]; then
+	# Check latest source: brew edit lcms
 	brew install lcms && \
 	curl -OL http://sourceforge.net/projects/lcms/files/lcms/1.19/lcms-1.19.tar.gz && \
 	tar zxf lcms-1.19.tar.gz && \
@@ -78,6 +84,7 @@ if [ ! -h "lcms" ]; then
 fi
 
 if [ ! -h "png" ]; then
+	# Check latest source: brew edit libpng
 	brew install libpng && \
 	curl -OL http://downloads.sf.net/project/libpng/libpng15/older-releases/1.5.14/libpng-1.5.14.tar.gz && \
 	tar zxf libpng-1.5.14.tar.gz && \
@@ -90,6 +97,7 @@ if [ ! -h "png" ]; then
 fi
 
 if [ ! -h "fftw" ]; then
+	# Check latest source: brew edit fftw
 	brew install fftw && \
 	curl -OL http://www.fftw.org/fftw-3.3.3.tar.gz && \
 	tar zxf fftw-3.3.3.tar.gz && \
@@ -102,6 +110,7 @@ if [ ! -h "fftw" ]; then
 fi
 
 if [ ! -h "lzma" ]; then
+	# Check latest source: brew edit xz
 	brew install xz && \
 	curl -OL http://tukaani.org/xz/xz-5.0.4.tar.bz2 && \
 	tar jxf xz-5.0.4.tar.bz2 && \
@@ -114,6 +123,7 @@ if [ ! -h "lzma" ]; then
 fi
 
 if [ ! -h "webp" ]; then
+	# Check latest source: brew edit webp
 	brew install webp && \
 	curl -OL http://webp.googlecode.com/files/libwebp-0.3.0.tar.gz && \
 	tar zxf libwebp-0.3.0.tar.gz && \
@@ -177,6 +187,7 @@ sudo make install
 
 MESSAGE="compile ImageMagick" ; checkSuccess
 
+echo "*** CHECKING no XQuartz build for expected delegates and formats"
 checkDelegates
 checkFormats
 
@@ -217,6 +228,7 @@ sudo make install
 
 MESSAGE="compile ImageMagick with XQuartz" ; checkSuccess
 
+echo "*** CHECKING XQuartz build for expected delegates and formats"
 checkDelegates
 
 DELEGATE=x ; checkDelegate
