@@ -113,10 +113,10 @@ fi
 if [ ! -h "lzma" ]; then
 	# Check latest source: brew edit xz
 	brew install xz && \
-	curl -OL http://tukaani.org/xz/xz-5.0.4.tar.bz2 && \
-	tar jxf xz-5.0.4.tar.bz2 && \
-	ln -s xz-5.0.4/src/liblzma/ lzma && \
-	pushd xz-5.0.4 && \
+	curl -OL http://fossies.org/linux/misc/xz-5.0.5.tar.gz && \
+	tar jxf xz-5.0.5.tar.gz && \
+	ln -s xz-5.0.5/src/liblzma/ lzma && \
+	pushd xz-5.0.5 && \
 	./configure --disable-shared && \
 	make && \
 	popd
