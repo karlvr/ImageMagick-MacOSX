@@ -156,7 +156,8 @@ checkDelegates() {
 	DELEGATE=lcms ; checkDelegate
 	DELEGATE=lzma ; checkDelegate
 	DELEGATE=png ; checkDelegate
-	DELEGATE=ps ; checkDelegate
+# We don't seem to be able to detect ps delegate anymore
+#	DELEGATE=ps ; checkDelegate
 	DELEGATE=tiff ; checkDelegate
 	DELEGATE=xml ; checkDelegate
 	DELEGATE=zlib ; checkDelegate
