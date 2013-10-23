@@ -126,13 +126,14 @@ fi
 if [ ! -h "webp" ]; then
 	# Check latest source: brew edit webp
 	brew install webp && \
-	curl -OL http://webp.googlecode.com/files/libwebp-0.3.0.tar.gz && \
-	tar zxf libwebp-0.3.0.tar.gz && \
-	ln -s libwebp-0.3.0 webp && \
+	curl -OL http://webp.googlecode.com/files/libwebp-0.3.1.tar.gz && \
+	tar zxf libwebp-0.3.1.tar.gz && \
+	ln -s libwebp-0.3.1 webp && \
 	pushd webp && \
 	./configure --disable-shared && \
 	make && \
 	ln -s src/.libs . && \
+	ln -s src/webp . && \
 	popd
 	MESSAGE="compile webp" ; checkSuccess
 fi
