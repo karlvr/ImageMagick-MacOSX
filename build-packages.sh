@@ -151,7 +151,7 @@ checkDelegates() {
 	DELEGATE=bzlib ; checkDelegate
 	DELEGATE=fftw ; checkDelegate
 	DELEGATE=jng ; checkDelegate
-	DELEGATE=jp2 ; checkDelegate
+#	DELEGATE=jp2 ; checkDelegate
 	DELEGATE=jpeg ; checkDelegate
 	DELEGATE=lcms ; checkDelegate
 	DELEGATE=lzma ; checkDelegate
@@ -172,7 +172,7 @@ checkFormat() {
 }
 
 checkFormats() {
-	FORMAT=jp2; checkFormat
+#	FORMAT=jp2; checkFormat
 	FORMAT=jpg; checkFormat
 	FORMAT=png; checkFormat
 	FORMAT=tiff; checkFormat
